@@ -13,6 +13,7 @@ namespace Microwave.Test.Integration
         private IPowerTube _powertube;
         private IOutput _output;
         public StringWriter _stringWriter;
+        public StringReader _stringReader;
 
         [SetUp]
         public void Setup()
@@ -27,7 +28,7 @@ namespace Microwave.Test.Integration
         [TestCase(99)]
         public void TurnOn_Output_PowerTubeWorksWithPower(int power)
         {
-            using (_stringWriter)
+            using (_stringReader)
             {
                 Console.SetOut(_stringWriter);
 
