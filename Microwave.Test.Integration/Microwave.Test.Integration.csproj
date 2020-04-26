@@ -58,8 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BU_IT5_PowerTube.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="IT3_PowertubeOutput.cs" />
+    <Compile Include="IT4_CookCtrlDisplay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
