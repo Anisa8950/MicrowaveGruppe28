@@ -5,13 +5,13 @@ using NSubstitute;
 using MicrowaveOvenClasses.Interfaces;
 using MicrowaveOvenClasses.Boundary;
 using MicrowaveOvenClasses.Controllers;
-
-
+using System.Threading;
+using Timer = MicrowaveOvenClasses.Boundary.Timer;
 
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT6_CookControllerTimer
+    class IT6_CookControllerTimer
     {
         private IDisplay _display;
         private IPowerTube _powerTube;
@@ -34,13 +34,6 @@ namespace Microwave.Test.Integration
         [Test]
         public void StartCooking_TimerStart()
         {
-            _cookController.StartCooking(50,60);
-            using (_stringWriter = new StringWriter())
-            {
-                Console.SetOut(_stringWriter);
-                _cookController.StartCooking(50, 60);
-            }
-
             
         }
     }
