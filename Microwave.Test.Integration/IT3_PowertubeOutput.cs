@@ -1,6 +1,5 @@
 ﻿using System;
 using NUnit.Framework;
-using NSubstitute;
 using System.IO;
 using MicrowaveOvenClasses.Boundary;
 using MicrowaveOvenClasses.Interfaces;
