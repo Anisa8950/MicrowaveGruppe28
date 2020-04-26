@@ -9,7 +9,7 @@ using MicrowaveOvenClasses.Controllers;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT5_CookControllerPowerTube
+    class IT5_CookControllerPowerTube
     {
         private IDisplay _display;
         private ITimer _timer;

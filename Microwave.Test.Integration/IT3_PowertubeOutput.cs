@@ -8,7 +8,7 @@ using MicrowaveOvenClasses.Interfaces;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT3_PowertubeOutput
+    class IT3_PowertubeOutput
     {
         private IPowerTube _powertube;
         private IOutput _output;
