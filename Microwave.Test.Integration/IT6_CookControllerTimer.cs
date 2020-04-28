@@ -94,12 +94,11 @@ namespace Microwave.Test.Integration
         {
             ManualResetEvent pause = new ManualResetEvent(false);
 
-            _timer.Expired += (sender, args) => pause.Set();
-            _cookController.StartCooking(50, 2);
+            _timer.TimerTick += (sender, args) => pause.Set();
+            _cookController.StartCooking(50,2);
+            _cookController.Stop();
 
-            // wait for expiration
-            Assert.That(!pause.WaitOne(1900));
-            _userInterface.DidNotReceive().CookingIsDone();
+            Assert.That(!pause.WaitOne(1100));
         }
 
     }
