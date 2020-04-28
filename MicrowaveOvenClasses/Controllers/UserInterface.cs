@@ -65,7 +65,7 @@ namespace MicrowaveOvenClasses.Controllers
                     myState = States.SETTIME;
                     break;
                 case States.SETTIME:
-                    time += 1;
+                    time += 1; //Antager at timeren er i minutter
                     myDisplay.ShowTime(time, 0);
                     break;
             }
@@ -84,7 +84,7 @@ namespace MicrowaveOvenClasses.Controllers
                     break;
                 case States.SETTIME:
                     myLight.TurnOn();
-                    myCooker.StartCooking(powerLevel, time*5);
+                    myCooker.StartCooking(powerLevel, time*60);
                     myState = States.COOKING;
                     break;
                 case States.COOKING:

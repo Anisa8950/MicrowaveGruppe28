@@ -36,9 +36,10 @@ namespace Microwave.Test.Integration
             {
                 Console.SetOut(_stringWriter);
 
-                _CookController.StartCooking(50, 50);
+                _CookController.StartCooking(50, 2);
+                _timer.TimerTick += Raise.Event();
             }
-            Assert.That(_stringWriter.ToString(), Is.EqualTo(String.Empty));
+            Assert.That(_stringWriter.ToString(), Is.EqualTo("Display shows: 00:00\r\n"));
         }
     }    
 }
