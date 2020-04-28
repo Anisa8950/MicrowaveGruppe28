@@ -9,13 +9,13 @@ using MicrowaveOvenClasses.Controllers;
 namespace Microwave.Test.Integration
 {
     [TestFixture]
-    public class IT4_CookCtrlDisplay
+    public class IT4_CookControllerDisplay
     {
-        private IDisplay _display;
-        private IOutput _output;
+        private Display _display;
+        private Output _output;
         private IPowerTube _powertube;
         private ITimer _timer;
-        private ICookController _CookController;
+        private CookController _CookController;
         private StringWriter _stringWriter;
 
         [SetUp]
@@ -27,19 +27,20 @@ namespace Microwave.Test.Integration
             _powertube = Substitute.For<IPowerTube>();
             _CookController = new CookController(_timer, _display, _powertube);
             _stringWriter = new StringWriter();
+            Console.SetOut(_stringWriter);
         }
 
-        [Test]
-        public void TimerOnDisplay_output_DisplayShowsMinSec()
+        [TestCase("00", "01")]
+        [TestCase("00", "59")]
+        [TestCase("01", "00")]
+        [TestCase("02", "00")]
+        [TestCase("02", "47")]
+        public void TimerOnDisplay_output_DisplayShowsMin(string min, string sek)
         {
-            using (_stringWriter)
-            {
-                Console.SetOut(_stringWriter);
+            _timer.TimeRemaining.Returns(Convert.ToInt32(min)*60 + Convert.ToInt32(sek));
+            _timer.TimerTick += Raise.EventWith(this, EventArgs.Empty);
 
-                _CookController.StartCooking(50, 2);
-                _timer.TimerTick += Raise.Event();
-            }
-            Assert.That(_stringWriter.ToString(), Is.EqualTo("Display shows: 00:00\r\n"));
+            Assert.That(_stringWriter.ToString().Contains(min +":"+ sek));
         }
     }    
 }
