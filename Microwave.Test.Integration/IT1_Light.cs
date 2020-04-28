@@ -10,7 +10,7 @@ namespace Microwave.Test.Integration
     [TestFixture]
     public class IT1_Light
     {
-        private Light _light; //skal man erklære dem med deres interfaces eller egetnlige klasser?
+        private Light _light; 
         private Output _output;
         public StringWriter _stringWriter;
 
@@ -20,18 +20,15 @@ namespace Microwave.Test.Integration
            _output = new Output();
             _light = new Light(_output);
             _stringWriter = new StringWriter();
+            Console.SetOut(_stringWriter);
 
         }
 
         [Test]
         public void TurnOn_Output_LightIsTurnedOn()
         {
-            using (_stringWriter)
-            {
-                Console.SetOut(_stringWriter);
-                _light.TurnOn();
-            }
-            Assert.That(_stringWriter.ToString, Is.EqualTo("Light is turned on\r\n"));
+            _light.TurnOn();
+            Assert.That(_stringWriter.ToString().Contains("on"));
         }
 
 
@@ -39,13 +36,8 @@ namespace Microwave.Test.Integration
         public void TurnOn_TurnOff_Output_LightIsTurnedOff()
         {
             _light.TurnOn();
-
-            using (_stringWriter)
-            {
-                Console.SetOut(_stringWriter);
-                _light.TurnOff();
-            }
-            Assert.That(_stringWriter.ToString, Is.EqualTo("Light is turned off\r\n"));
+            _light.TurnOff();
+            Assert.That(_stringWriter.ToString().Contains("off"));
         }
     }
 }
