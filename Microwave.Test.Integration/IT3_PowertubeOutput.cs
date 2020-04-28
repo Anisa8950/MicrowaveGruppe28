@@ -23,9 +23,9 @@ namespace Microwave.Test.Integration
             Console.SetOut(_stringWriter);
         }
 
-        [TestCase(2)]
         [TestCase(50)]
-        [TestCase(99)]
+        [TestCase(100)]
+        [TestCase(200)]
         public void TurnOn_Output_PowerTubeWorksWithPower(int power)
         {
             _powertube.TurnOn(power);
@@ -44,7 +44,7 @@ namespace Microwave.Test.Integration
         public void TurnOff_Output_Nothing()
         {
             _powertube.TurnOff();
-            Assert.That(_stringWriter.ToString().Contains("off"), Is.False);
+            Assert.That(!_stringWriter.ToString().Contains("off"));
         }
     }    
 }
