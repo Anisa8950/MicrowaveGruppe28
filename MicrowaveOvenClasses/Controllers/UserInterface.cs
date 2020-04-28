@@ -44,7 +44,7 @@ namespace MicrowaveOvenClasses.Controllers
         public void OnPowerPressed(object sender, EventArgs e)
         {
             switch (myState)
-            {
+            { 
                 case States.READY:
                     myDisplay.ShowPower(powerLevel);
                     myState = States.SETPOWER;

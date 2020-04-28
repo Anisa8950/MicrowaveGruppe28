@@ -15,10 +15,10 @@ namespace Microwave.Test.Integration
     [TestFixture]
     public class IT2_DisplayOutput
     {
-        private IDisplay display_;
-        private IOutput output_;
+        private Display display_;
+        private Output output_;
         public StringWriter _stringWriter;
-        public StringReader _stringReader;
+        //public StringReader _stringReader;
 
 
         [SetUp]
