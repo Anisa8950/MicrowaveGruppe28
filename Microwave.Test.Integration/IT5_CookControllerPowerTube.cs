@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 using NUnit.Framework;
 using NSubstitute;
 using MicrowaveOvenClasses.Interfaces;
@@ -17,7 +18,7 @@ namespace Microwave.Test.Integration
         private PowerTube _powertube;
         private Output _output;
         private CookController _cookController;
-        public StringWriter _stringWriter;
+        private StringWriter _stringWriter;
 
         [SetUp]
         public void SetUp()
@@ -29,6 +30,8 @@ namespace Microwave.Test.Integration
             _output = new Output();
             _powertube = new PowerTube(_output);
             _cookController = new CookController(_timer,_display,_powertube,_userInterface);
+            _stringWriter = new StringWriter();
+            Console.SetOut(_stringWriter);
         }
 
         #region PowerTubeOn
@@ -42,13 +45,8 @@ namespace Microwave.Test.Integration
         [Test]
         public void StartCooking_PowerTubeTurnOn_PowerTubeIsTurnedOn()
         {
-            using (_stringWriter = new StringWriter())
-            {
-                Console.SetOut(_stringWriter);
-                _cookController.StartCooking(50, 60);
-            }
-            
-            Assert.That(_stringWriter.ToString(), Is.EqualTo("PowerTube works with 50\r\n"));
+            _cookController.StartCooking(50, 60);
+            Assert.That(_stringWriter.ToString().Contains("PowerTube works with"));
         }
 
         [Test]
@@ -58,7 +56,7 @@ namespace Microwave.Test.Integration
         }
 
         [Test]
-        public void StartCooking_PowerTubeTurnOn_PowerTurnIsAlreadyTurnedOn()
+        public void StartCooking_PowerTubeTurnOn_PowerTubeIsAlreadyTurnedOn()
         {
             _cookController.StartCooking(50,60);
             Assert.That(() => _cookController.StartCooking(50, 60), Throws.TypeOf<ApplicationException>());
@@ -70,12 +68,8 @@ namespace Microwave.Test.Integration
         [Test]
         public void OnTimerExpired_PowerTubeTurnOff_PowerTubeIsTurnedOff()
         {
-            using (_stringWriter = new StringWriter())
-            {
-                Console.SetOut(_stringWriter);
-                _cookController.StartCooking(50, 60);
-                _timer.Expired += Raise.EventWith(this, EventArgs.Empty);
-            }
+            _cookController.StartCooking(50, 60);
+            _timer.Expired += Raise.EventWith(this, EventArgs.Empty);
 
             Assert.That(_stringWriter.ToString().Contains("off"));
         }
@@ -83,12 +77,8 @@ namespace Microwave.Test.Integration
         [Test]
         public void StopCooking_PowerTubeTurnOff_PowerTubeIsTurnedOff()
         {
-            using (_stringWriter = new StringWriter())
-            {
-                Console.SetOut(_stringWriter);
-                _cookController.StartCooking(50, 60);
-                _cookController.Stop();
-            }
+            _cookController.StartCooking(50, 60);
+            _cookController.Stop();
 
             Assert.That(_stringWriter.ToString().Contains("off"));
         }
