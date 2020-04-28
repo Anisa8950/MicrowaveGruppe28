@@ -65,7 +65,7 @@ namespace MicrowaveOvenClasses.Controllers
                     myState = States.SETTIME;
                     break;
                 case States.SETTIME:
-                    time += 1;
+                    time += 1; //Antager at timeren er i minutter
                     myDisplay.ShowTime(time, 0);
                     break;
             }
