@@ -25,37 +25,38 @@ namespace Microwave.Test.Integration
 
         public void Setup()
         {
-
-            display_=new Display(output_);
-            output_=new Output();
-            _stringWriter = new StringWriter();
+            output_ = new Output();
+            display_ =new Display(output_);
+           
+           
 
 
         }
 
-        [TestCase(3, 20)]
-        [TestCase(2, 40)]
-        [TestCase(1, 15)]
+        [TestCase("03", "20")]
+        [TestCase("02", "40")]
+        [TestCase("01", "15")]
 
-        public void ShowTime_Output_DisplayShowsCorrectTime(int min, int sec)
+        public void ShowTime_Output_DisplayShowsCorrectTime(string min, string sec)
         {
 
-            using (_stringReader)
+            using (_stringWriter= new StringWriter())
             {
                 Console.SetOut(_stringWriter);
 
-                display_.ShowTime(min, sec);
+                display_.ShowTime(Convert.ToInt32(min), Convert.ToInt32(sec));
             }
-            Assert.That(_stringWriter.ToString(),Is.EqualTo("Display shows: "+min+ ":" +sec+ " \r\n"));
+            Assert.That(_stringWriter.ToString(),Is.EqualTo("Display shows: "+min+ ":" +sec+"\r\n"));
 
         }
+
 
         [TestCase(30)]
         [TestCase(20)]
         [TestCase(10)]
         public void ShowPower_Output_DisplayShowsCorrectPower(int power)
         {
-            using (_stringReader)
+            using (_stringWriter= new StringWriter())
             {
                 Console.SetOut(_stringWriter);
 
@@ -69,7 +70,7 @@ namespace Microwave.Test.Integration
 
         public void Clear_Output_DisplayShowsClear()
         {
-            using (_stringReader)
+            using (_stringWriter= new StringWriter())
             {
                 Console.SetOut(_stringWriter);
 
