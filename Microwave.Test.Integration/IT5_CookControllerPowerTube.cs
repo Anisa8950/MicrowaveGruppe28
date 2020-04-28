@@ -29,6 +29,8 @@ namespace Microwave.Test.Integration
             _output = new Output();
             _powertube = new PowerTube(_output);
             _cookController = new CookController(_timer,_display,_powertube,_userInterface);
+            _stringWriter = new StringWriter();
+            Console.SetOut(_stringWriter);
         }
 
         #region PowerTubeOn
@@ -42,12 +44,13 @@ namespace Microwave.Test.Integration
         [Test]
         public void StartCooking_PowerTubeTurnOn_PowerTubeIsTurnedOn()
         {
-            using (_stringWriter = new StringWriter())
-            {
-                Console.SetOut(_stringWriter);
-                _cookController.StartCooking(50, 60);
-            }
-            
+            //using (_stringWriter = new StringWriter())
+            //{
+            //    Console.SetOut(_stringWriter);
+            //    
+            //}
+            _cookController.StartCooking(50, 60);
+
             Assert.That(_stringWriter.ToString(), Is.EqualTo("PowerTube works with 50\r\n"));
         }
 

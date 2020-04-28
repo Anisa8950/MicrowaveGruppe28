@@ -10,10 +10,9 @@ namespace Microwave.Test.Integration
     [TestFixture]
     class IT3_PowertubeOutput
     {
-        private IPowerTube _powertube;
-        private IOutput _output;
+        private PowerTube _powertube;
+        private Output _output;
         public StringWriter _stringWriter;
-        public StringReader _stringReader;
 
         [SetUp]
         public void Setup()
@@ -21,6 +20,7 @@ namespace Microwave.Test.Integration
             _output = new Output();
             _powertube = new PowerTube(_output);
             _stringWriter = new StringWriter();
+            Console.SetOut(_stringWriter);
         }
 
         [TestCase(2)]
@@ -28,37 +28,23 @@ namespace Microwave.Test.Integration
         [TestCase(99)]
         public void TurnOn_Output_PowerTubeWorksWithPower(int power)
         {
-            using (_stringReader)
-            {
-                Console.SetOut(_stringWriter);
-
-                _powertube.TurnOn(power);
-            }
-            Assert.That(_stringWriter.ToString(), Is.EqualTo("PowerTube works with " + power + "\r\n"));
+            _powertube.TurnOn(power);
+            Assert.That(_stringWriter.ToString().Contains(""+power));
         }
 
         [Test]
         public void TurnOn_TurnOff_Output_PowerTubeTurnedOff()
         {
-            using (_stringWriter)
-            {
-                Console.SetOut(_stringWriter);
-                _powertube.TurnOn(50);
-                _powertube.TurnOff();
-            }
-            Assert.That(_stringWriter.ToString, Is.EqualTo("PowerTube works with 50\r\nPowerTube turned off\r\n"));
+            _powertube.TurnOn(50);
+            _powertube.TurnOff();
+            Assert.That(_stringWriter.ToString().Contains("off"));
         }
 
         [Test]
         public void TurnOff_Output_Nothing()
         {
-            using (_stringWriter)
-            {
-                Console.SetOut(_stringWriter);
-
-                _powertube.TurnOff();
-            }
-            Assert.That(_stringWriter.ToString(), Is.EqualTo(String.Empty));
+            _powertube.TurnOff();
+            Assert.That(_stringWriter.ToString().Contains("off"), Is.False);
         }
     }    
 }
