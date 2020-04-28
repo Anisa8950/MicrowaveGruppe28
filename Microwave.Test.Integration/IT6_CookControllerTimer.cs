@@ -6,6 +6,7 @@ using MicrowaveOvenClasses.Interfaces;
 using MicrowaveOvenClasses.Boundary;
 using MicrowaveOvenClasses.Controllers;
 using System.Threading;
+using NUnit.Framework.Constraints;
 using Timer = MicrowaveOvenClasses.Boundary.Timer;
 
 namespace Microwave.Test.Integration
@@ -35,6 +36,20 @@ namespace Microwave.Test.Integration
         public void StartCooking_TimerStart()
         {
             
+        }
+
+        [Test]
+        public void StartCooking_TimerTick_ShortEnough()
+        {
+            ManualResetEvent pause = new ManualResetEvent(false);
+
+            _timer.TimerTick += (sender, args) => pause.Set();
+            _cookController.StartCooking(50,2);
+
+            // wait for one tick, but no longer
+            Assert.That(pause.WaitOne(1100));
+            _display.Received(1).ShowTime(Arg.Any<int>(),Arg.Any<int>());
+            _display.Received(1).ShowTime(0, 1);
         }
     }
 }
