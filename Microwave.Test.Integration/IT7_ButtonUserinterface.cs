@@ -133,9 +133,11 @@ namespace Microwave.Test.Integration
             _timeButton.Press(); 
             _startCancelButton.Press(); //Set state SetCooking
 
+            _startCancelButton.Press();
+
             _cookController.Received(1).Stop();
             _light.Received(1).TurnOff();
-            _display.Received(1).
+            _display.Received(1).Clear();
         }
 
         #endregion

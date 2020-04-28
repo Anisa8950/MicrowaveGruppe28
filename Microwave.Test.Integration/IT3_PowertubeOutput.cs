@@ -24,8 +24,8 @@ namespace Microwave.Test.Integration
         }
 
         [TestCase(50)]
-        [TestCase(100)]
-        [TestCase(200)]
+        [TestCase(350)]
+        [TestCase(700)]
         public void TurnOn_Output_PowerTubeWorksWithPower(int power)
         {
             _powertube.TurnOn(power);
