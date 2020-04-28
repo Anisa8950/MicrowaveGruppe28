@@ -49,10 +49,11 @@ namespace Microwave.Test.Integration
             Assert.That(_stringWriter.ToString().Contains("PowerTube works with"));
         }
 
-        [Test]
-        public void StartCooking_PowerTubeTurnOn_PowerOutOfRangeException()
+        [TestCase(49)]
+        [TestCase(701)]
+        public void StartCooking_PowerTubeTurnOn_PowerOutOfRangeException(int power)
         {
-            Assert.That(() => _cookController.StartCooking(101,60), Throws.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(() => _cookController.StartCooking(power,60), Throws.TypeOf<ArgumentOutOfRangeException>());
         }
 
         [Test]
