@@ -47,9 +47,9 @@ namespace Microwave.Test.Integration
 
 
         [Test] 
-        public void startCancelButton_Pressed_LightOn()
+        public void StateSetPower_startCancelButtonPressed_LightOff()
         {
-
+            powerButton_.Press();
             startCancelButton_.Press();
             Assert.That(stringWriter_.ToString().Contains("Light is turned off"));
 
@@ -57,21 +57,72 @@ namespace Microwave.Test.Integration
         }
 
 
-        [Test]
-        public void timeButton_Pressed_()
+        [Test] // fejler - hvordan kan man få sat .. fra start
+        public void StateSetTime_startCancelButtonPressed_LightOn()
         {
+            powerButton_.Press();
+            timeButton_.Press();
+            startCancelButton_.Press();
 
-
+            Assert.That(stringWriter_.ToString().Contains("Light is turned on"));
 
         }
 
         [Test]
-        public void test3()
+        public void StateCooking_startCancelButtonPressed_LightOff()
         {
+            powerButton_.Press();
+            timeButton_.Press();
+            startCancelButton_.Press();
+            startCancelButton_.Press();
 
 
+            Assert.That(stringWriter_.ToString().Contains("Light is turned off"));
 
         }
+
+
+        [Test]
+        public void StateReady_DoorOpened_LightOn()
+        {
+            door_.Open();
+
+            Assert.That(stringWriter_.ToString().Contains("Light is turned on"));
+
+        }
+
+        [Test]
+        public void StateSetPower_DoorOpened_LightOn()
+        {
+            powerButton_.Press();
+            door_.Open();
+
+            Assert.That(stringWriter_.ToString().Contains("Light is turned on"));
+
+        }
+
+
+        [Test]
+        public void StateSetTime_DoorOpened_LightOn()
+        {
+            powerButton_.Press();
+            timeButton_.Press();
+            door_.Open();
+
+            Assert.That(stringWriter_.ToString().Contains("Light is turned on"));
+
+        }
+
+        [Test]
+        public void StateDoorOpen_DoorClosed_LightOff()
+        {
+            door_.Open();
+            door_.Close();
+
+            Assert.That(stringWriter_.ToString().Contains("Light is turned off"));
+
+        }
+
 
     }
 

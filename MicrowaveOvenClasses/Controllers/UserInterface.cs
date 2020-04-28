@@ -75,7 +75,7 @@ namespace MicrowaveOvenClasses.Controllers
         {
             switch (myState)
             {
-                case States.SETPOWER:
+                case States.SETPOWER: // det er lidt underligt at der kaldes turnoff i dette stadie  
                     powerLevel = 50;
                     time = 1;
                     myLight.TurnOff();
