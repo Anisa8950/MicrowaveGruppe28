@@ -12,7 +12,7 @@ namespace Microwave.Test.Integration
     {
         private PowerTube _powertube;
         private Output _output;
-        public StringWriter _stringWriter;
+        private StringWriter _stringWriter;
 
         [SetUp]
         public void Setup()

@@ -11,14 +11,14 @@ namespace Microwave.Test.Integration
     [TestFixture]
     public class IT7_ButtonUserinterface
     {
-        Button _powerButton;
-        Button _timeButton;
-        Button _startCancelButton;
-        IDisplay _display;
-        IDoor _door;
-        ILight _light;
-        ICookController _cookController;
-        UserInterface _userinterface;
+        private Button _powerButton;
+        private Button _timeButton;
+        private Button _startCancelButton;
+        private IDisplay _display;
+        private IDoor _door;
+        private ILight _light;
+        private ICookController _cookController;
+        private UserInterface _userinterface;
 
         [SetUp]
         public void SetUp()
