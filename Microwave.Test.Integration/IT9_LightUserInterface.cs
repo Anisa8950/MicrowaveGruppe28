@@ -47,26 +47,15 @@ namespace Microwave.Test.Integration
 
 
         [Test] 
-        public void StateSetPower_startCancelButtonPressed_LightOff()
+        public void StateSetTime_startCancelButtonPressed_LightOn()
         {
             powerButton_.Press();
+            timeButton_.Press();
             startCancelButton_.Press();
-            Assert.That(stringWriter_.ToString().Contains("Light is turned off"));
 
+            Assert.That(stringWriter_.ToString().Contains("Light is turned on"));
 
         }
-
-
-        //[Test] // fejler - hvordan kan man få sat IsOn til true fra start
-        //public void StateSetTime_startCancelButtonPressed_LightOn()
-        //{
-        //    powerButton_.Press();
-        //    timeButton_.Press();
-        //    startCancelButton_.Press();
-
-        //    Assert.That(stringWriter_.ToString().Contains("Light is turned on"));
-
-        //}
 
         [Test]
         public void StateCooking_startCancelButtonPressed_LightOff()
