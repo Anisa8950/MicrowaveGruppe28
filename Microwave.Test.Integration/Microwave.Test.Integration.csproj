@@ -66,6 +66,8 @@
     <Compile Include="IT4_CookControllerDisplay.cs" />
     <Compile Include="IT6_CookControllerTimer.cs" />
     <Compile Include="IT7_ButtonUserinterface.cs" />
+    <Compile Include="IT8_DoorUserinterface.cs" />
+    <Compile Include="IT9_LightUserInterface.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

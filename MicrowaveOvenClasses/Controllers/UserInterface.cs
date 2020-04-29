@@ -35,7 +35,7 @@ namespace MicrowaveOvenClasses.Controllers
 
             door.Closed += new EventHandler(OnDoorClosed);
             door.Opened += new EventHandler(OnDoorOpened);
-
+            
             myCooker = cooker;
             myLight = light;
             myDisplay = display;
@@ -44,7 +44,7 @@ namespace MicrowaveOvenClasses.Controllers
         public void OnPowerPressed(object sender, EventArgs e)
         {
             switch (myState)
-            {
+            { 
                 case States.READY:
                     myDisplay.ShowPower(powerLevel);
                     myState = States.SETPOWER;
@@ -75,7 +75,7 @@ namespace MicrowaveOvenClasses.Controllers
         {
             switch (myState)
             {
-                case States.SETPOWER:
+                case States.SETPOWER: // det er lidt underligt at der kaldes turnoff i dette stadie  
                     powerLevel = 50;
                     time = 1;
                     myLight.TurnOff();
