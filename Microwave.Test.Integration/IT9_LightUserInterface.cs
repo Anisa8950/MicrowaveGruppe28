@@ -47,17 +47,6 @@ namespace Microwave.Test.Integration
 
 
         [Test] 
-        public void StateSetPower_startCancelButtonPressed_LightOff()
-        {
-            powerButton_.Press();
-            startCancelButton_.Press();
-            Assert.That(stringWriter_.ToString().Contains("Light is turned off"));
-
-
-        }
-
-
-        [Test] // fejler - hvordan kan man få sat .. fra start
         public void StateSetTime_startCancelButtonPressed_LightOn()
         {
             powerButton_.Press();
@@ -120,6 +109,18 @@ namespace Microwave.Test.Integration
             door_.Close();
 
             Assert.That(stringWriter_.ToString().Contains("Light is turned off"));
+
+        }
+
+
+        [Test]
+        public void StateCooking_CookingIsDone_LightOff()
+        {
+           powerButton_.Press();
+           timeButton_.Press();
+           startCancelButton_.Press();
+           userinterface_.CookingIsDone();
+           Assert.That(stringWriter_.ToString().Contains("Light is turned off"));
 
         }
 
