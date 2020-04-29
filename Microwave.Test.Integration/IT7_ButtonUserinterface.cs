@@ -111,7 +111,6 @@ namespace Microwave.Test.Integration
             _startCancelButton.Press();
 
             _display.Received(1).Clear();
-            _light.Received(1).TurnOff();
         }
 
         [Test]
